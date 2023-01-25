@@ -1,6 +1,7 @@
 const $window = $(window);
 
 
+
 /*Appear animation*/
 
 const elemnts = document.querySelectorAll('.content');
@@ -95,3 +96,39 @@ function dragEnd() {
 document.getElementById('user-content').addEventListener('dragover', e => {
     e.preventDefault();
 });
+
+
+
+/* Theme changes */
+
+var lightMode = false;
+const root = document.querySelector(':root');
+const theme = document.getElementById('theme');
+const sun = document.getElementById('sun-icon');
+const moon = document.getElementById('moon-icon');
+
+function themeChange() {
+    if(!lightMode) {
+        root.style.setProperty('--clr-primary', 'rgb(46, 45, 45)');
+        root.style.setProperty('--clr-secondary', 'white');
+        root.style.setProperty('--clr-bg', 'rgb(19, 19, 22)');
+
+        theme.classList.add('to-right');
+        
+        sun.classList.add('hide')
+        moon.classList.remove('hide')
+    }
+    else {
+        root.style.setProperty('--clr-primary', 'white');
+        root.style.setProperty('--clr-secondary', 'rgb(46, 45, 45)');
+        root.style.setProperty('--clr-bg', 'white');
+        
+        theme.classList.remove('to-right');
+        
+        sun.classList.remove('hide')
+        moon.classList.add('hide')
+    }
+    lightMode = !lightMode;
+}
+
+themeChange();

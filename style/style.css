@@ -26,14 +26,14 @@ a:hover {
 :root {
 
     /* Light Mode */
-    --var-primary: white;
-    --var-secondary: rgba(46, 45, 45);
-    --var-bg: rgb(185, 185, 206);
+    --clr-primary: white;
+    --clr-secondary: rgb(46, 45, 45);
+    --clr-bg: rgba(46, 46, 255, 0.123);
     
     /* Dark Mode */
-    --var-primary: rgba(46, 45, 45);
-    --var-secondary: white;
-    --var-bg: rgb(19, 19, 22);
+    --clr-primary: rgb(46, 45, 45);
+    --clr-secondary: white;
+    --clr-bg: rgb(19, 19, 22);
 }
 
 html {
@@ -45,8 +45,8 @@ html {
 body {
     font-family: 'Poppins';
 
-    background-color: var(--var-bg);
-    color: var(--var-secondary);
+    background-color: var(--clr-bg);
+    color: var(--clr-secondary);
 
     display: grid;
     place-items: center;
@@ -75,18 +75,23 @@ body {
 }
 
 .odd-order-border {
-    border-top: 2px solid var(--var-secondary);
-    border-right: 2px solid var(--var-secondary);
+    border-top: 2px solid var(--clr-secondary);
+    border-right: 2px solid var(--clr-secondary);
 }
 .even-order-border {
-    border-top: 2px solid var(--var-secondary);
-    border-left: 2px solid var(--var-secondary);
+    border-top: 2px solid var(--clr-secondary);
+    border-left: 2px solid var(--clr-secondary);
+}
+
+.sections:nth-of-type(4) {
+    border-bottom: 2px solid var(--clr-secondary);
 }
 
 .content > * {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--clr-secondary);
 }
 
 .features-list {
@@ -125,7 +130,9 @@ body {
     border-radius: 1.5rem;
     margin: 3rem 0.5rem;
 
-    background-color: var(--var-primary);
+    border: 1px solid rgb(46, 45, 45);
+
+    background-color: var(--clr-primary);
 
     display: flex;
     align-items: center;
@@ -242,9 +249,9 @@ body {
     height: 90%;
     width: 100%;
 
-    background-color: var(--var-primary);
+    background-color: var(--clr-primary);
 
-    border: 2px solid var(--var-secondary);
+    border: 2px solid var(--clr-secondary);
 
     border-radius: 1rem;
 
@@ -259,7 +266,7 @@ body {
     height: 30%;
     width: 10%;
 
-    background-color: var(--var-secondary);
+    background-color: var(--clr-secondary);
 
     border-radius: 2px;
 }
@@ -288,8 +295,8 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: var(--var-secondary);
-    color: var(--var-primary);
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
 
     padding: 2px;
     margin: 1rem;
@@ -310,7 +317,53 @@ body {
     width: 8rem;
 
     background-color: yellow;
-    color: var(--var-bg);
+    color: rgb(46, 45, 45);
 
     transform: rotate(-45deg);
+}
+
+#theme {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 3.6rem;
+    height: 1.9rem;
+
+    border-radius: 1rem;
+
+    background-color: var(--clr-secondary);
+
+    margin: 1rem;
+    padding: 0.2rem;
+
+    display: flex;
+    overflow: hidden;
+
+    cursor: pointer;
+    
+    z-index: 1;
+}
+
+.to-right > * {
+    transform: translateX(100%);
+}
+
+.theme-value {
+    width: 50%;
+    height: 100%;
+
+    border-radius: 1rem;
+    
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transition: .4s;
+    -webkit-transition: .4s;
+
+    z-index: 2;
 }
