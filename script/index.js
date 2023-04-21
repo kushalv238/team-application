@@ -6,9 +6,9 @@ const $window = $(window);
 
 const elemnts = document.querySelectorAll('.content');
 
-const observe = new IntersectionObserver ( (elemnts) => {
+const observe = new IntersectionObserver((elemnts) => {
     elemnts.forEach((elemnt) => {
-        if(elemnt.isIntersecting) {
+        if (elemnt.isIntersecting) {
             elemnt.target.classList.add('appear');
         }
         else {
@@ -30,10 +30,9 @@ function goDown(goDownBy) {
 };
 
 var seenAll = false;
-const zoom = document.getElementById('scroll-text-section');
-$(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() < $(document).height()-500) {
-        if(!seenAll) {
+$(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() < $(document).height() - 500) {
+        if (!seenAll) {
             mouse.classList.remove('hide');
         }
         seenAll = true;
@@ -47,10 +46,10 @@ $(window).scroll(function() {
 
 /*toggle user-info*/
 
-for(var i = 1; i < 5; ++i) {
-    const person = document.getElementById('person'+i);
-    const card = document.getElementById('card'+i);
-    const clickMe = document.getElementById('click-me-'+i);
+for (var i = 1; i < 5; ++i) {
+    const person = document.getElementById('person' + i);
+    const card = document.getElementById('card' + i);
+    const clickMe = document.getElementById('click-me-' + i);
 
     person.onclick = () => {
         card.classList.toggle('hide')
@@ -66,7 +65,7 @@ for(var i = 1; i < 5; ++i) {
 /* For phone */
 
 function showHideInfo() {
-    if($window.width() < 900) {
+    if ($window.width() < 900) {
         card1.classList.add('hide');
         card2.classList.add('hide');
         card3.classList.add('hide');
@@ -75,7 +74,7 @@ function showHideInfo() {
 }
 
 showHideInfo();
-$(window).resize(function() {
+$(window).resize(function () {
     showHideInfo();
 });
 
@@ -100,35 +99,69 @@ document.getElementById('user-content').addEventListener('dragover', e => {
 
 
 /* Theme changes */
+const themeButton = document.getElementById('theme');
 
-var lightMode = false;
-const root = document.querySelector(':root');
-const theme = document.getElementById('theme');
 const sun = document.getElementById('sun-icon');
 const moon = document.getElementById('moon-icon');
 
+const root = document.querySelector(':root');
+
 function themeChange() {
-    if(!lightMode) {
+    var theme = JSON.parse(localStorage.getItem('theme'));
+
+    theme = (theme === 'dark' ? 'light' : 'dark');
+
+    if (theme === 'light') {
+        root.style.setProperty('--clr-primary', 'white');
+        root.style.setProperty('--clr-secondary', 'rgb(46, 45, 45)');
+        root.style.setProperty('--clr-bg', 'white');
+
+        themeButton.classList.remove('to-right');
+
+        sun.classList.remove('hide')
+        moon.classList.add('hide')
+    }
+    else {
         root.style.setProperty('--clr-primary', 'rgb(46, 45, 45)');
         root.style.setProperty('--clr-secondary', 'white');
         root.style.setProperty('--clr-bg', 'rgb(19, 19, 22)');
 
-        theme.classList.add('to-right');
-        
+        themeButton.classList.add('to-right');
+
         sun.classList.add('hide')
         moon.classList.remove('hide')
     }
-    else {
+
+    localStorage.setItem('theme', JSON.stringify(theme))
+}
+
+// themeChange();
+
+function setTheme() {
+    var theme = JSON.parse(localStorage.getItem('theme'));
+
+    if (theme === 'light') {
         root.style.setProperty('--clr-primary', 'white');
         root.style.setProperty('--clr-secondary', 'rgb(46, 45, 45)');
         root.style.setProperty('--clr-bg', 'white');
-        
-        theme.classList.remove('to-right');
-        
+
+        themeButton.classList.remove('to-right');
+
         sun.classList.remove('hide')
         moon.classList.add('hide')
     }
-    lightMode = !lightMode;
+    else {
+        root.style.setProperty('--clr-primary', 'rgb(46, 45, 45)');
+        root.style.setProperty('--clr-secondary', 'white');
+        root.style.setProperty('--clr-bg', 'rgb(19, 19, 22)');
+
+        themeButton.classList.add('to-right');
+
+        sun.classList.add('hide')
+        moon.classList.remove('hide')
+    }
+
+    localStorage.setItem('theme', JSON.stringify(theme || 'dark'))
 }
 
-themeChange();
+onload = setTheme();
