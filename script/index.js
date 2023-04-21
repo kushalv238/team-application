@@ -1,7 +1,5 @@
 const $window = $(window);
 
-
-
 /*Appear animation*/
 
 const elemnts = document.querySelectorAll('.content');
@@ -138,6 +136,8 @@ function themeChange() {
 // themeChange();
 
 function setTheme() {
+    goDown(-$(document).height());
+
     var theme = JSON.parse(localStorage.getItem('theme'));
 
     if (theme === 'light') {
@@ -161,7 +161,7 @@ function setTheme() {
         moon.classList.remove('hide')
     }
 
-    localStorage.setItem('theme', JSON.stringify(theme || 'dark'))
+    localStorage.setItem('theme', JSON.stringify(theme || 'dark'));
 }
 
 onload = setTheme();
